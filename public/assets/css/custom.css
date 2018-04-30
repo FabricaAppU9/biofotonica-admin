@@ -1,0 +1,56 @@
+/*
+	1 - LINK
+	2 - PAINEL
+    3 - SEPARATOR (HR)
+    4 - TABLE
+*/
+
+/* --- LINK --- */
+a:link {text-decoration: none}
+a:visited {text-decoration: none}
+a:hover {text-decoration: none}
+a:active {text-decoration: none}
+
+/* --- PAINEL --- */
+
+.panel{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.panel-heading{
+	padding: 10px 15px;
+    /* border-bottom: 1px solid transparent; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* --- SEPARATOR --- */
+
+.separa{
+	width: 75%
+    height: 2px;
+}
+
+/* --- TABLE --- */
+
+.action{
+    padding: 5px;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: white;
+    /* text-decoration: none; */
+}
+
+.action:hover{
+    color: #e1e1e1;
+}
+
+.edita{
+    background-color: #002eff;
+    border-radius: 5px;
+}
