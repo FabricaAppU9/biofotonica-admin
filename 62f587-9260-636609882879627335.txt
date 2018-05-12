@@ -1,2 +1,0 @@
-2018-05-03T23:51:26  PID[9260] Verbose     SnapshotHelper::RestoreSnapshotInternal SUCCESS - File.Copy
-2018-05-03T23:51:27  PID[9260] Verbose     SnapshotHelper::RestoreSnapshotInternal SUCCESS - process
