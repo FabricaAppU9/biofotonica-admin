@@ -25,12 +25,12 @@ class DoencaController extends Controller {
     }
 
     public function index() {
-        $fontes = $this->fonte->all();
-        $fontes2 = DB::select('select distinct nm_fonte from fontes');
-        $doencas = $this->doenca->all();
-        $doencas2 = DB::select('select distinct cid from doencas');
-        $equips = $this->equip->all();
-        $equips2 = DB::select('select distinct nm_equip from equips');
+        $fontes = $this->fonte->getAll();
+        $fontes2 = $this->fonte->getAll(['nm_fonte']);
+        $doencas = $this->doenca->getAll();
+        $doencas2 = $this->doenca->getAll(['nome_doenca']);
+        $equips = $this->equip->getAll();
+        $equips2 = $this->equip->getAll(['nm_equip']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -58,12 +58,12 @@ class DoencaController extends Controller {
     public function edit($cid) {
         $doe = $this->doenca->find($cid);
 
-        $fontes = $this->fonte->all();
-        $fontes2 = DB::select('select distinct nm_fonte from fontes');
-        $doencas = $this->doenca->all();
-        $doencas2 = DB::select('select distinct cid from doencas');
-        $equips = $this->equip->all();
-        $equips2 = DB::select('select distinct nm_equip from equips');
+        $fontes = $this->fonte->getAll();
+        $fontes2 = $this->fonte->getAll(['nm_fonte']);
+        $doencas = $this->doenca->getAll();
+        $doencas2 = $this->doenca->getAll(['nome_doenca']);
+        $equips = $this->equip->getAll();
+        $equips2 = $this->equip->getAll(['nm_equip']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -86,4 +86,10 @@ class DoencaController extends Controller {
         //
     }
 
+    public function apiDoencas($fonte) {
+
+        return DB::select("SELECT d.cid,d.nome_doenca FROM `tratas` t JOIN doencas
+         d ON (t.cid = d.cid) WHERE nm_fonte = '$fonte' GROUP BY d.cid");
+    }
+    
 }

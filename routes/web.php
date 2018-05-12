@@ -25,3 +25,4 @@ Route::resource('/doenca', 'DoencaController');
 
 Route::get('/trata', 'trataController@index');
 Route::resource('/trata', 'trataController');
+

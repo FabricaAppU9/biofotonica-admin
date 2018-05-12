@@ -135,7 +135,7 @@
 
                 <td>
                     <a href="{{route('equip.edit', $equip->id_equip)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
-                    <!--<a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
+                    <!-- <a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a> -->
                 </td>
             </tr>
             @endforeach

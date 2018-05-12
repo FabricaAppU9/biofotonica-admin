@@ -24,12 +24,12 @@ class DashController extends Controller {
     }
 
     public function index() {
-        $fontes = $this->fonte->all();
-        $fontes2 = DB::select('select distinct nm_fonte from fontes');
-        $doencas = $this->doenca->all();
-        $doencas2 = DB::select('select distinct cid from doencas');
-        $equips = $this->equip->all();
-        $equips2 = DB::select('select distinct nm_equip from equips');
+        $fontes = $this->fonte->getAll();
+        $fontes2 = $this->fonte->getAll(['nm_fonte']);
+        $doencas = $this->doenca->getAll();
+        $doencas2 = $this->doenca->getAll(['nome_doenca']);
+        $equips = $this->equip->getAll();
+        $equips2 = $this->equip->getAll(['nm_equip']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');

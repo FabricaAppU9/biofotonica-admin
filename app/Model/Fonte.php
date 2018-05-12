@@ -14,4 +14,12 @@ class Fonte extends Model {
         'modelo',
     ];
 
+    public function getAll(Array $colums = []) {
+        if(count($colums)){
+            return $this->all($colums);
+        }
+
+        return $this->all();
+    }
+
 }

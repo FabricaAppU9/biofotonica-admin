@@ -24,12 +24,12 @@ class EquipController extends Controller {
     }
 
     public function index() {
-        $fontes = $this->fonte->all();
-        $fontes2 = DB::select('select distinct nm_fonte from fontes');
-        $doencas = $this->doenca->all();
-        $doencas2 = DB::select('select distinct cid from doencas');
-        $equips = $this->equip->all();
-        $equips2 = DB::select('select distinct nm_equip from equips');
+        $fontes = $this->fonte->getAll();
+        $fontes2 = $this->fonte->getAll(['nm_fonte']);
+        $doencas = $this->doenca->getAll();
+        $doencas2 = $this->doenca->getAll(['nome_doenca']);
+        $equips = $this->equip->getAll();
+        $equips2 = $this->equip->getAll(['nm_equip']);
         $tratas = $this->trata->all();
 
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -57,12 +57,12 @@ class EquipController extends Controller {
     public function edit($id_equip) {
         $equip = $this->equip->find($id_equip);
 
-        $fontes = $this->fonte->all();
-        $fontes2 = DB::select('select distinct nm_fonte from fontes');
-        $doencas = $this->doenca->all();
-        $doencas2 = DB::select('select distinct cid from doencas');
-        $equips = $this->equip->all();
-        $equips2 = DB::select('select distinct nm_equip from equips');
+        $fontes = $this->fonte->getAll();
+        $fontes2 = $this->fonte->getAll(['nm_fonte']);
+        $doencas = $this->doenca->getAll();
+        $doencas2 = $this->doenca->getAll(['nome_doenca']);
+        $equips = $this->equip->getAll();
+        $equips2 = $this->equip->getAll(['nm_equip']);
         $tratas = $this->trata->all();
 
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -83,6 +83,12 @@ class EquipController extends Controller {
 
     public function destroy($id) {
         //
+    }
+
+    public function apiEquip($fonte, $doenca) {
+        return DB::select("SELECT e.* FROM `tratas` t 
+        JOIN equips e ON (t.nm_equip = e.nm_equip) 
+        WHERE t.cid = '$doenca' AND t.nm_fonte = '$fonte' GROUP BY e.id_equip;");
     }
 
 }

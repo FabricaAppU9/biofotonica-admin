@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('fonte_tratamento', 'FonteController@apiFontes');
+Route::get('doenca_tratamento/{fonte}', 'DoencaController@apiDoencas');
+Route::get('equipamento_tratamento/{fonte}/{doenca}', 'EquipController@apiEquip');
+Route::post('gera_config', function(Request $request) {
+    return 'deu certo';
+});
