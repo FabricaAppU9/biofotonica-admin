@@ -20,6 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('fonte_tratamento', 'FonteController@apiFontes');
 Route::get('doenca_tratamento/{fonte}', 'DoencaController@apiDoencas');
 Route::get('equipamento_tratamento/{fonte}/{doenca}', 'EquipController@apiEquip');
-Route::post('gera_config', function(Request $request) {
-    return 'deu certo';
-});
+Route::post('gera_config', 'trataController@apiTrata' );

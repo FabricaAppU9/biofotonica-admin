@@ -8,6 +8,7 @@ use App\Model\Fonte;
 use App\Model\Doenca;
 use App\Model\Equip;
 use App\Model\Trata;
+use App\Model\Configuracoes;
 
 class trataController extends Controller
 {
@@ -15,13 +16,14 @@ class trataController extends Controller
     private $doenca;
     private $equip;
     private $trata;
+    private $config;
 
-    public function __construct(Fonte $fonte, Doenca $doenca, Equip $equip, Trata $trata) {
+    public function __construct(Fonte $fonte, Doenca $doenca, Equip $equip, Trata $trata, Configuracoes $config) {
         $this->fonte = $fonte;
         $this->doenca = $doenca;
         $this->equip = $equip;
         $this->trata = $trata;
-        
+        $this->config = $config;
     }
 
     public function index() {
@@ -81,6 +83,10 @@ class trataController extends Controller
 
     public function destroy($id) {
         //
+    }
+  
+    public function apiTrata(Request $request) {
+        return $this->config->geraConfigs($request);
     }
     
 

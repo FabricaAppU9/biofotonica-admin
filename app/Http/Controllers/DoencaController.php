@@ -89,7 +89,7 @@ class DoencaController extends Controller {
     public function apiDoencas($fonte) {
 
         return DB::select("SELECT d.cid,d.nome_doenca FROM `tratas` t JOIN doencas
-         d ON (t.cid = d.cid) WHERE nm_fonte = '$fonte' GROUP BY d.cid");
+         d ON (t.cid = d.cid) WHERE nm_fonte = '$fonte' GROUP BY d.cid,d.nome_doenca");
     }
     
 }

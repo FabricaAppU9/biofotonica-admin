@@ -86,9 +86,9 @@ class EquipController extends Controller {
     }
 
     public function apiEquip($fonte, $doenca) {
-        return DB::select("SELECT e.* FROM `tratas` t 
+        return DB::select("SELECT e.id_equip,e.nm_equip FROM `tratas` t 
         JOIN equips e ON (t.nm_equip = e.nm_equip) 
-        WHERE t.cid = '$doenca' AND t.nm_fonte = '$fonte' GROUP BY e.id_equip;");
+        WHERE t.cid = '$doenca' AND t.nm_fonte = '$fonte' GROUP BY e.id_equip, e.nm_equip");
     }
 
 }
