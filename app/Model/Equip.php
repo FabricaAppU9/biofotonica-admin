@@ -19,11 +19,5 @@ class Equip extends Model
         'perfil',
         'id_fl'];
     
-        public function getAll(Array $colums = []) {
-            if(count($colums)){
-                return $this->all($colums);
-            }
-    
-            return $this->all();
-        }
+     
 }

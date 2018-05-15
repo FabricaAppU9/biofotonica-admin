@@ -25,12 +25,12 @@ class FonteController extends Controller {
     }
 
     public function index() {
-        $fontes = $this->fonte->getAll();
-        $fontes2 = $this->fonte->getAll(['nm_fonte']);
-        $doencas = $this->doenca->getAll();
-        $doencas2 = $this->doenca->getAll(['nome_doenca']);
-        $equips = $this->equip->getAll();
-        $equips2 = $this->equip->getAll(['nm_equip']);
+        $fontes = $this->fonte->all();
+        $fontes2 = $this->fonte->all(['nm_fonte']);
+        $doencas = $this->doenca->all();
+        $doencas2 = $this->doenca->all(['cid']);
+        $equips = $this->equip->all();
+        $equips2 = $this->equip->all(['nm_equip']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -57,12 +57,12 @@ class FonteController extends Controller {
 
     public function edit($id_fonte) {
         $font = $this->fonte->find($id_fonte);
-        $fontes = $this->fonte->getAll();
-        $fontes2 = $this->fonte->getAll(['nm_fonte']);
-        $doencas = $this->doenca->getAll();
-        $doencas2 = $this->doenca->getAll(['nome_doenca']);
-        $equips = $this->equip->getAll();
-        $equips2 = $this->equip->getAll(['nm_equip']);
+        $fontes = $this->fonte->all();
+        $fontes2 = $this->fonte->all(['nm_fonte']);
+        $doencas = $this->doenca->all();
+        $doencas2 = $this->doenca->all(['cid']);
+        $equips = $this->equip->all();
+        $equips2 = $this->equip->all(['nm_equip']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
