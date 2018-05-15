@@ -86,7 +86,7 @@ class FonteController extends Controller {
     }
     
     public function apiFontes() {
-        return $this->fonte->select("SELECT * FROM `doencas`");
+        return $this->fonte->all();
     }
 
 }
