@@ -17,6 +17,7 @@ class Equip extends Model
         'potencia_max',
         'polarizacao',
         'perfil',
+        'enabled',
         'id_fl'];
     
      

@@ -21,15 +21,16 @@ class DashController extends Controller {
         $this->doenca = $doenca;
         $this->equip = $equip;
         $this->trata = $trata;
+        $this->middleware('auth');
     }
 
     public function index() {
         $fontes = $this->fonte->all();
-        $fontes2 = $this->fonte->all(['nm_fonte']);
+        $fontes2 = $this->fonte->all(['nm_fonte','enabled']);
         $doencas = $this->doenca->all();
-        $doencas2 = $this->doenca->all(['cid']);
+        $doencas2 = $this->doenca->all(['cid','enabled']);
         $equips = $this->equip->all();
-        $equips2 = $this->equip->all(['nm_equip']);
+        $equips2 = $this->equip->all(['nm_equip','enabled']);
         $tratas = $this->trata->all();
         
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');

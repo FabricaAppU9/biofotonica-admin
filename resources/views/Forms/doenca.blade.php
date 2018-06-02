@@ -11,12 +11,12 @@
         <div class='row'>
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="cid" name="cid" placeholder="C.I.D - Código Internacional de Doença" value="{{$doe -> cid or old('cid')}}">
+                    <input required type="text" class="form-control" id="cid" name="cid" placeholder="C.I.D - Código Internacional de Doença" value="{{$doe -> cid or old('cid')}}">
                 </div>
             </div>
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="nome_doenca" name="nome_doenca" placeholder="Nome da Doença" value="{{$doe -> nome_doenca or old('nome_doenca')}}">
+                    <input required type="text" class="form-control" id="nome_doenca" name="nome_doenca" placeholder="Nome da Doença" value="{{$doe -> nome_doenca or old('nome_doenca')}}">
                 </div>
             </div>
         </div>
@@ -68,19 +68,24 @@
             <tr>
                 <th>C.I.D</th>
                 <th>Nome da Doença</th>
-                <th style="width: 100px">Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach($doencas as $doenca)
+            @if($doenca->enabled)
             <tr>
                 <td>{{$doenca->cid}}</td>
                 <td>{{$doenca->nome_doenca}}</td>
                 <td>
                     <a href="{{route('doenca.edit', $doenca->cid)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
-                    <!--<a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
+                </td>
+                <td>
+                {!! Form::open(['route' => ['doenca.disable', $doenca->cid],'method' => 'PUT']) !!}
+                {!! Form::button('<i class="fa fa-trash fa-lg"></i>',['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                {!! Form::close() !!}
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

@@ -11,13 +11,13 @@
         <div class='row'>
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="nm_equip" name="nm_equip" placeholder="Nome do Equipamento" value="{{$equip -> nm_equip or old('nm_equip')}}">
+                    <input required type="text" class="form-control" id="nm_equip" name="nm_equip" placeholder="Nome do Equipamento" value="{{$equip -> nm_equip or old('nm_equip')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input name="nm_fabricante" class="form-control" list="fabricantes" placeholder="Nome do Fabricante" value="{{$equip -> nm_fabricante or old('nm_fabricante')}}">
+                    <input required name="nm_fabricante" class="form-control" list="fabricantes" placeholder="Nome do Fabricante" value="{{$equip -> nm_fabricante or old('nm_fabricante')}}">
                         <datalist id="fabricantes">
                             @foreach ($fab as $fabs)
                             <option value="{{$fabs->nm_fabricante}}"> {{$fabs->nm_fabricante}} </option>
@@ -28,37 +28,37 @@
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="comprimento_onda" name="comprimento_onda" placeholder="Comprimento da Onda" value="{{$equip -> comprimento_onda or old('comprimento_onda')}}">
+                    <input required type="text" class="form-control" id="comprimento_onda" name="comprimento_onda" placeholder="Comprimento da Onda" value="{{$equip -> comprimento_onda or old('comprimento_onda')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="modo_operacao" name="modo_operacao" placeholder="Modo de Operação" value="{{$equip -> modo_operacao or old('modo_operacao')}}">
+                    <input required type="text" class="form-control" id="modo_operacao" name="modo_operacao" placeholder="Modo de Operação" value="{{$equip -> modo_operacao or old('modo_operacao')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="area" name="area" placeholder="Area" value="{{$equip -> area or old('area')}}">
+                    <input required type="text" class="form-control" id="area" name="area" placeholder="Area" value="{{$equip -> area or old('area')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="potencia_max" name="potencia_max" placeholder="Potência Máxima" value="{{$equip -> potencia_max or old('potencia_max')}}">
+                    <input required type="text" class="form-control" id="potencia_max" name="potencia_max" placeholder="Potência Máxima" value="{{$equip -> potencia_max or old('potencia_max')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="polarizacao" name="polarizacao" placeholder="Polarização" value="{{$equip -> polarizacao or old('polarizacao')}}">
+                    <input required type="text" class="form-control" id="polarizacao" name="polarizacao" placeholder="Polarização" value="{{$equip -> polarizacao or old('polarizacao')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="perfil" name="perfil" placeholder="Perfil" value="{{$equip -> perfil or old('perfil')}}">
+                    <input required type="text" class="form-control" id="perfil" name="perfil" placeholder="Perfil" value="{{$equip -> perfil or old('perfil')}}">
                 </div>
             </div>
 
@@ -118,11 +118,11 @@
                 <th>Potência</th>
                 <th>Polarização</th>
                 <th>Perfil</th>
-                <th style="width: 100px">Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach($equips as $equip)
+            @if($equip->enabled)
             <tr>
                 <td>{{$equip->nm_equip}}</td>
                 <td>{{$equip->nm_fabricante}}</td>
@@ -135,9 +135,14 @@
 
                 <td>
                     <a href="{{route('equip.edit', $equip->id_equip)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
-                    <!-- <a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a> -->
+                </td>
+                <td>
+                {!! Form::open(['route' => ['equip.disable', $equip->id_equip],'method' => 'PUT']) !!}
+                {!! Form::button('<i class="fa fa-trash fa-lg"></i>',['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                {!! Form::close() !!}
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

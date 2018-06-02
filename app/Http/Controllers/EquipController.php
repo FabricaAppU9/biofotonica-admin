@@ -58,11 +58,11 @@ class EquipController extends Controller {
         $equip = $this->equip->find($id_equip);
 
         $fontes = $this->fonte->all();
-        $fontes2 = $this->fonte->all(['nm_fonte']);
+        $fontes2 = $this->fonte->all(['nm_fonte','enabled']);
         $doencas = $this->doenca->all();
-        $doencas2 = $this->doenca->all(['cid']);
+        $doencas2 = $this->doenca->all(['cid','enabled']);
         $equips = $this->equip->all();
-        $equips2 = $this->equip->all(['nm_equip']);
+        $equips2 = $this->equip->all(['nm_equip','enabled']);
         $tratas = $this->trata->all();
 
         $fab = DB::select('SELECT DISTINCT nm_fabricante from equips');
@@ -81,8 +81,13 @@ class EquipController extends Controller {
         endif;
     }
 
-    public function destroy($id) {
-        //
+    public function disable($id) {
+        $equip = $this->equip->find($id);
+        $equip->enabled = 0;
+
+        $equip->save();
+
+        return redirect()->route('equip.index');
     }
 
     public function apiEquip($fonte, $doenca) {

@@ -23,6 +23,7 @@ class CreateEquipsTable extends Migration
             $table->string('potencia_max');
             $table->string('polarizacao');
             $table->string('perfil');
+            $table->boolean('enabled')->default(1);
             $table->timestamps();
         });
     }

@@ -12,7 +12,8 @@ class Trata extends Model {
         'nm_equip',
         'tempo',
         'sessoes',
-        'freq'
+        'freq',
+        'enabled'
     ];
 
 }

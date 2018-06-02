@@ -14,19 +14,19 @@
         <div class='row'>
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="nm_fonte" name="nm_fonte" placeholder="Nome da Fonte" value="{{$font-> nm_fonte or old('nm_fonte')}}">
+                    <input required type="text" class="form-control" id="nm_fonte" name="nm_fonte" placeholder="Nome da Fonte" value="{{$font-> nm_fonte or old('nm_fonte')}}">
                 </div>
             </div>
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Nome do Fabricantes" value="{{$font -> fabricante or old('fabricante')}}">
+                    <input required type="text" class="form-control" id="fabricante" name="fabricante" placeholder="Nome do Fabricantes" value="{{$font -> fabricante or old('fabricante')}}">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class='col-md-6'>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo" value="{{$font -> modelo or old('modelo')}}">
+                    <input required type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo" value="{{$font -> modelo or old('modelo')}}">
                 </div>
             </div>
             <div class="col-md-6 text-center">
@@ -77,20 +77,25 @@
                 <th>Fonte de Luz</th>
                 <th>Fabricante</th>
                 <th>Modelo</th>
-                <th style="width: 100px">Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach($fontes as $fonte)
-            <tr>
-                <td>{{$fonte->nm_fonte}}</td>
-                <td>{{$fonte->fabricante}}</td>
-                <td>{{$fonte->modelo}}</td>
-                <td>
-                    <a href="{{route('fonte.edit', $fonte->id_fonte)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
-                    <!--<a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
-                </td>
-            </tr>
+                @if($fonte->enabled)
+                <tr>
+                    <td>{{$fonte->nm_fonte}}</td>
+                    <td>{{$fonte->fabricante}}</td>
+                    <td>{{$fonte->modelo}}</td>
+                    <td>
+                        <a href="{{route('fonte.edit', $fonte->id_fonte)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
+                    </td>
+                    <td>
+                        {!! Form::open(['route' => ['fonte.disable', $fonte->id_fonte],'method' => 'PUT']) !!}
+                        {!! Form::button('<i class="fa fa-trash fa-lg"></i>',['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

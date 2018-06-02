@@ -12,11 +12,13 @@
             <div class='col-md-6'>
                 <div class="form-group ">
                     <!-- <input type="text" class="form-control" id="nm_fonte" name="nm_fonte" placeholder="Nome da Fonte de luz" value="{{$trata -> nm_fonte or old('nm_fonte')}}"> -->
-                    <select name="nm_fonte" class="form-control">
+                    <select required name="nm_fonte" class="form-control">
                     <option value='{{$trata->nm_fonte or ''}}'> {{$trata->nm_fonte or '### Selecione a Fonte de Luz ###'}}</option>
                     <option value=''> --- </option>
                             @foreach ($fontes2 as $fonte2)
-                        <option value="{{$fonte2->nm_fonte}}"> {{$fonte2->nm_fonte}} </option>
+                            @if($fonte2->enabled)
+                                <option value="{{$fonte2->nm_fonte}}"> {{$fonte2->nm_fonte}} </option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -25,10 +27,12 @@
             <div class='col-md-6'>
                 <div class="form-group ">
                     <!--input type="text" class="form-control" id="cid" name="cid" placeholder="CID" value="{{$trata -> cid or old('cid')}}"-->
-                    <select name="cid" class="form-control">
+                    <select required name="cid" class="form-control">
                         <option value='{{$trata->cid or ''}}'>{{$trata->cid or ('### Selecione o C.I.D ###')}} </option>
                         @foreach ($doencas2 as $doenca2)
-                        <option value="{{$doenca2->cid}}"> {{$doenca2->cid}} </option>
+                        @if($doenca2->enabled)
+                         <option value="{{$doenca2->cid}}"> {{$doenca2->cid}} </option>
+                        @endif
                         @endforeach
                     </select>
                 </div>
@@ -37,10 +41,12 @@
             <div class='col-md-6'>
                 <div class="form-group ">
                     <!--input type="text" class="form-control" id="nm_equip" name="nm_equip" placeholder="Nome do Equipamento" value="{{$trata -> nm_equip or old('nm_equip')}}"-->
-                    <select name="nm_equip" class="form-control">
+                    <select required name="nm_equip" class="form-control">
                         <option value='{{$trata->nm_equip or ''}}'>{{$trata->nm_equip or ('### Selecione um Equipamento ###')}} </option>
                         @foreach ($equips2 as $equip2)
+                        @if($equip2->enabled)
                         <option value="{{$equip2->nm_equip}}"> {{$equip2->nm_equip}} </option>
+                        @endif
                         @endforeach
                     </select>
                 </div>
@@ -48,19 +54,19 @@
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="tempo" name="tempo" placeholder="Duração da Sessão" value="{{$trata -> tempo or old('tempo')}}">
+                    <input required type="text" class="form-control" id="tempo" name="tempo" placeholder="Duração da Sessão" value="{{$trata -> tempo or old('tempo')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="sessoes" name="sessoes" placeholder="Sessoes" value="{{$trata -> sessoes or old('sessoes')}}">
+                    <input required type="text" class="form-control" id="sessoes" name="sessoes" placeholder="Sessoes" value="{{$trata -> sessoes or old('sessoes')}}">
                 </div>
             </div>
 
             <div class='col-md-6'>
                 <div class="form-group ">
-                    <input type="text" class="form-control" id="freq" name="freq" placeholder="Frequencia" value="{{$trata -> freq or old('freq')}}">
+                    <input required type="text" class="form-control" id="freq" name="freq" placeholder="Frequencia" value="{{$trata -> freq or old('freq')}}">
                 </div>
             </div>
 
@@ -119,11 +125,11 @@
                 <th>Sessões</th>
                 <th>Frequencia</th>
 
-                <th style="width: 100px">Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach($tratas as $trata)
+            @if($trata->enabled)
             <tr>
                 <td>{{$trata->nm_fonte}}</td>
                 <td>{{$trata->cid}}</td>
@@ -134,9 +140,14 @@
 
                 <td>
                     <a href="{{route('trata.edit', $trata->id)}}" class="edita action"><span class="fa fa-pencil" aria-hidden="true"></span></a>
-                    <!--<a href="#" class="delete actions"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
+                </td>
+                <td>
+                {!! Form::open(['route' => ['trata.disable', $trata->id],'method' => 'PUT']) !!}
+                {!! Form::button('<i class="fa fa-trash fa-lg"></i>',['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                {!! Form::close() !!}
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

@@ -103,6 +103,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'password' => [
+            'min' => 'A senha precisa ter no mínimo :min caracteres.',
+            'confirmed' => 'A senha de confirmação está diferente.'
+        ]
     ],
 
     /*

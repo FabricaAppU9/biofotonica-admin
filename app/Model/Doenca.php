@@ -9,7 +9,8 @@ class Doenca extends Model {
     protected $primaryKey = 'cid';
     protected $fillable = [
         'cid',
-        'nome_doenca'
+        'nome_doenca',
+        'enabled'
     ];
 
 }

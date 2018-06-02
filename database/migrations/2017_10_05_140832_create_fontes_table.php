@@ -18,6 +18,7 @@ class CreateFontesTable extends Migration
             $table->string('nm_fonte', 40)->unique();
             $table->string('fabricante', 50);
             $table->string('modelo', 30);
+            $table->boolean('enabled')->default(1);
             $table->timestamps();
         });
     }

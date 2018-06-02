@@ -12,6 +12,7 @@ class Fonte extends Model {
         'nm_fonte',
         'fabricante',
         'modelo',
+        'enabled'
     ];
 
 }

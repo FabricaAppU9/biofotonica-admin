@@ -44,6 +44,7 @@
     </head>
 
     <body>
+  
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -54,7 +55,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><STRONG>BIO</strong>-<small>FOTONICA!</small></a>
+                    <a class="navbar-brand" href=""><STRONG>BIO</strong>-<small>FOTONICA!</small></a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
@@ -62,13 +63,12 @@
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil </a>
+                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-fw"></i> Sair </a>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair </a>
-                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                         </ul>
                     </li>
                 </ul>
@@ -76,11 +76,13 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav in" id="side-menu">
                             <li>
-                                <a href="#"><i class="fa fa fa-industry fa-fw"></i> Pagina Inicial</a>
+                                <a href="{{route('index')}}"><i class="fa fa fa-industry fa-fw"></i> Pagina Inicial</a>
                             </li>
-                            <li>
-                                <a href="usuarios.html"><i class="fa fa-wrench fa-fw"></i> Gerenciar Usuarios</a>
-                            </li>
+                            @if(Auth::user()->isAdmin())
+                                <li>
+                                    <a href="{{route('admin')}}"><i class="fa fa-wrench fa-fw"></i> Gerenciar Usuarios</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -97,7 +99,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="{{url('dist/js/sb-admin-2.js')}}"></script>
 
         @yield('scripts')
     </body>

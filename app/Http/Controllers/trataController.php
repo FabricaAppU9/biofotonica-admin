@@ -81,8 +81,13 @@ class trataController extends Controller
         endif;
     }
 
-    public function destroy($id) {
-        //
+    public function disable($id) {
+        $trata = $this->trata->find($id);
+        $trata->enabled = 0;
+
+        $trata->save();
+
+        return redirect()->route('trata.index');
     }
   
     public function apiTrata(Request $request) {

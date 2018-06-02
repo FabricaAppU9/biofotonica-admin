@@ -21,6 +21,7 @@ class CreateTratasTable extends Migration
             $table->string('tempo');
             $table->string('sessoes');
             $table->string('freq');
+            $table->boolean('enabled')->default(1);
             $table->foreign('cid')->
                     references('cid')->
                     on('doencas')->
