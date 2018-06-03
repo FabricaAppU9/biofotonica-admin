@@ -34,7 +34,9 @@ class Configuracoes extends Model
              ->select('tratas.tempo','tratas.sessoes','tratas.freq','doencas.cid','equips.comprimento_onda'
                       ,'equips.modo_operacao','equips.area','equips.potencia_max'
                       ,'equips.polarizacao','equips.perfil')
-             ->where("nm_fonte","=","Led")
+             ->where("nm_fonte",'=',$configs->input('light.nm_fonte'))
+             ->where('equips.nm_equip','=',$configs->input('equipment.nm_equip'))
+             ->where('doencas.nome_doenca','=',$configs->input('disease.nome_doenca'))
              ->first();
       
              $this->diametroSaidaLaser = $configsArmazenadas->area;
@@ -44,12 +46,12 @@ class Configuracoes extends Model
              $this->polarizacao = $configsArmazenadas->polarizacao;
              $this->areaSaidaLaser = 3.14*pow(($this->diametroSaidaLaser/2),2);
              $this->perfilFeixe = $configsArmazenadas->perfil;
-             $this->tamanhoFeixeAlvo = 1;
+             $this->tamanhoFeixeAlvo = $configs->beamSize;
              $this->irradianciaAlvo = number_format(($this->potenciaRadiante / $this->areaSaidaLaser),3);
              $this->exposicaoRadiante = 4;
              $this->tempoExposicaoPorPonto = ($this->exposicaoRadiante*$this->areaSaidaLaser) / $this->potenciaRadiante; 
              $this->energiaRadiante = ($this->potenciaRadiante * $this->tempoExposicaoPorPonto);
-             $this->numeroPontosIrradiados = 2;
+             $this->numeroPontosIrradiados = $configs->irradiatedSpots;
              $this->numeroTratamentos = $configsArmazenadas->sessoes;
              $this->frequenciaTratamentos = $configsArmazenadas->freq;
              $this->energiaRadianteTotal = ($this->energiaRadiante * $this->numeroPontosIrradiados);
